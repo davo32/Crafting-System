@@ -1,5 +1,4 @@
 using TMPro;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 namespace InventoryBackend
 {
@@ -13,21 +12,22 @@ namespace InventoryBackend
         MYTHIC
     }
 
-    public class Inv_Item 
+    public class Inv_Item : DataObject
     {
         public Sprite itemSprite;
         public string ItemName;
         public int Quantity;
         public Quality quality;
-
+        public bool Stackable;
         public Inv_Item() { }
         //Constructor - Default
-        public Inv_Item(Sprite s, string name, int quantity, Quality q)
+        public Inv_Item(Sprite s, string name, int quantity, Quality q, bool stackable)
         {
             itemSprite = s;
             ItemName = name;
             Quantity = quantity;
             quality = q;
+            Stackable = stackable;
         }
 
         //Copy Constructor
@@ -37,6 +37,7 @@ namespace InventoryBackend
             ItemName = copyData.ItemName;
             Quantity = copyData.Quantity;
             quality = copyData.quality;
+            Stackable = copyData.Stackable;
         }
 
         public virtual void Use(TextMeshProUGUI text)

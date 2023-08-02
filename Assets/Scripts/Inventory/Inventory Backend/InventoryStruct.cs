@@ -4,7 +4,7 @@ namespace InventoryBackend
 {
     public struct InventoryStruct
     {
-        private List<Inv_Item> InventoryItems;
+        private List<DataObject> InventoryItems;
         private int maxInventorySize;
         private int stackLimit;
 
@@ -13,7 +13,7 @@ namespace InventoryBackend
         {
             maxInventorySize = newInvSize;
             stackLimit = newStackLimit;
-            InventoryItems = new List<Inv_Item>();
+            InventoryItems = new List<DataObject>();
         }
 
         public int GetMaxSize()
@@ -39,7 +39,7 @@ namespace InventoryBackend
             return false;
         }
 
-        public List<Inv_Item> GetInventory()
+        public List<DataObject> GetInventory()
         {
             return InventoryItems;
         }
@@ -65,7 +65,7 @@ namespace InventoryBackend
         {
             if (CheckItem(itemData) && itemData.Quantity < stackLimit)
             {
-                Inv_Item item = InventoryItems.Find(x => x == itemData);
+                Inv_Item item = (Inv_Item)InventoryItems.Find(x => x == itemData);
                 int combinedQuantity = item.Quantity + itemData.Quantity;
                 if (item.Quantity < stackLimit && combinedQuantity < stackLimit)
                 {
@@ -106,7 +106,7 @@ namespace InventoryBackend
             {
                 if (CheckItem(itemData))
                 {
-                    Inv_Item item = InventoryItems.Find(x => x == itemData);
+                    Inv_Item item = (Inv_Item)InventoryItems.Find(x => x == itemData);
                     item.Quantity++;
                 }
                 else
@@ -124,7 +124,7 @@ namespace InventoryBackend
             }
             else
             {
-                Inv_Item item = InventoryItems.Find(x => x == itemData);
+                Inv_Item item = (Inv_Item)InventoryItems.Find(x => x == itemData);
                 if (item.Quantity > 1)
                 {
                     item.Quantity--;
